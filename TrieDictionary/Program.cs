@@ -14,15 +14,20 @@ Trie dictionary = InitializeTrie(words);
 // DeleteWord();
 // GetSpellingSuggestions();
 
+// Declaração da função InitializeTrie que recebe um array de strings como parâmetro
 Trie InitializeTrie(string[] words)
 {
+    // Cria uma nova instância da estrutura de dados Trie
     Trie trie = new Trie();
 
+    // Loop que percorre cada palavra no array de strings
     foreach (string word in words)
     {
+        // Insere a palavra atual na estrutura Trie
         trie.Insert(word);
     }
 
+    // Retorna a estrutura Trie após todas as palavras serem inseridas
     return trie;
 }
 
@@ -198,9 +203,20 @@ void PrintTrie(Trie trie)
 {
     Console.WriteLine("The dictionary contains the following words:");
     List<string> words = trie.GetAllWords();
-    foreach (string word in words)
+    int columnCount = 5;
+    int wordCount = words.Count;
+    int wordsPerColumn = (int)Math.Ceiling((double)wordCount / columnCount);
+
+    for (int i = 0; i < wordsPerColumn; i++)
     {
-        Console.Write($"{word}, ");
+        for (int j = 0; j < columnCount; j++)
+        {
+            int index = i + j * wordsPerColumn;
+            if (index < wordCount)
+            {
+                Console.Write($"{words[index],-15}");
+            }
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
 }
